@@ -1,0 +1,97 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.privalia'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://packages.confluent.io/maven/"
+	}
+	maven {
+		url "http://artifactory-mkp.privalia.pin/artifactory/libs-release"
+	}
+	maven {
+		url "http://repo.spring.io/milestone"
+	}
+}
+
+/*
+ * This adds the integrationTests folders into project's classpath.
+ */
+sourceSets {
+	integrationTest {
+		java {
+			srcDirs = ['src/integrationTest/java']
+			compileClasspath += sourceSets.main.output
+			runtimeClasspath += sourceSets.main.output
+		}
+		resources {
+			srcDirs = ['src/integrationTest/resources']
+		}
+	}
+}
+
+/*
+ * This creates a new Gradle task to run integration tests.
+ */
+task integrationTest(type: Test) {
+	description = 'Runs integration tests.'
+	group = 'verification'
+
+	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+	shouldRunAfter test
+}
+
+configurations {
+	integrationTestCompile.extendsFrom implementation
+	integrationTestRuntimeOnly.extendsFrom runtimeOnly
+	compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+
+dependencies {
+
+	//Spring Boot
+	implementation('org.springframework.boot:spring-boot-starter')
+
+	// Health, metrics, web server...
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation('org.springframework.boot:spring-boot-starter-undertow')
+	implementation('org.springframework.boot:spring-boot-starter-actuator')
+
+	// Common logs library by Privalia
+	implementation('com.privalia.commons:java-common-logback:2.4.0')
+
+	//swagger
+	implementation("io.springfox:springfox-swagger-ui:2.6.1")
+	implementation("io.springfox:springfox-swagger2:2.6.1")
+
+	// Lombok
+	implementation('org.projectlombok:lombok')
+
+	//Library for read excel
+	compile "org.apache.poi:poi:3.17"
+	compile "org.apache.poi:poi-ooxml:3.17"
+
+	//Testing
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+}
