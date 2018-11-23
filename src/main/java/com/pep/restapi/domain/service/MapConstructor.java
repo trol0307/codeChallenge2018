@@ -23,7 +23,10 @@ public class MapConstructor {
                     map.setElementOnMap(y,x,'B');
                 } else if (x == 0 || x   == map.getMapWidth()-1) {
                     map.setElementOnMap(y,x,'B');
+                } else {
+                    map.setElementOnMap(y,x,'O');
                 }
+
             }
         }
     }
