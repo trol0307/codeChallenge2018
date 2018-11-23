@@ -1,7 +1,10 @@
 package com.pep.restapi.domain.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class Board {
 
     private Size size;

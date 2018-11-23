@@ -10,7 +10,7 @@ public class ProcessChallengeActionRequest {
         this.gamePost = gamePost;
     }
 
-    public GamePost processChallengeActionRequest() {
+    public GamePost gamePost() {
         return gamePost;
     }
 }

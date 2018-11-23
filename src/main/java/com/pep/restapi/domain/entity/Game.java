@@ -1,7 +1,10 @@
 package com.pep.restapi.domain.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
+@Component
 public class Game {
 
     private UUID id;
@@ -23,4 +26,8 @@ public class Game {
     public UUID id(){
         return this.id;
     }
+
+
+
+
 }
