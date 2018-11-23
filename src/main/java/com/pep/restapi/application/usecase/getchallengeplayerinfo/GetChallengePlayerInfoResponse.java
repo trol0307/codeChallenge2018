@@ -17,7 +17,7 @@ public class GetChallengePlayerInfoResponse {
         return name;
     }
 
-    public String geteMail() {
+    public String getEmail() {
         return email;
     }
 
