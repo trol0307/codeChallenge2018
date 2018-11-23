@@ -25,9 +25,6 @@ repositories {
 		url "https://packages.confluent.io/maven/"
 	}
 	maven {
-		url "http://artifactory-mkp.privalia.pin/artifactory/libs-release"
-	}
-	maven {
 		url "http://repo.spring.io/milestone"
 	}
 }
@@ -71,17 +68,12 @@ dependencies {
 
 	//Spring Boot
 	implementation('org.springframework.boot:spring-boot-starter')
-	implementation('org.codehaus.jackson:jackson-mapper-asl:1.9.10')
-	implementation('org.codehaus.jackson:jackson-databind:1.9.10')
 
 
 	// Health, metrics, web server...
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.boot:spring-boot-starter-undertow')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
-
-	// Common logs library by Privalia
-	implementation('com.privalia.commons:java-common-logback:2.4.0')
 
 	//swagger
 	implementation("io.springfox:springfox-swagger-ui:2.6.1")
