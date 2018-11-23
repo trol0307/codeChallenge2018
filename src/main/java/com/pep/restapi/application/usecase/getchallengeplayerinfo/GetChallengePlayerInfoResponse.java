@@ -3,13 +3,13 @@ package com.pep.restapi.application.usecase.getchallengeplayerinfo;
 public class GetChallengePlayerInfoResponse {
 
     private String name;
-    private String eMail;
+    private String email;
     private Integer statusCode;
 
 
-    public GetChallengePlayerInfoResponse(String name, String eMail, Integer statusCode){
+    public GetChallengePlayerInfoResponse(String name, String email, Integer statusCode){
         this.name = name;
-        this.eMail= eMail;
+        this.email= email;
         this.statusCode = statusCode;
     }
 
@@ -18,7 +18,7 @@ public class GetChallengePlayerInfoResponse {
     }
 
     public String geteMail() {
-        return eMail;
+        return email;
     }
 
     public Integer getStatusCode() {
