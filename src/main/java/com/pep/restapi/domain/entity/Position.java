@@ -3,7 +3,7 @@ package com.pep.restapi.domain.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy {
+public class Position {
 
     private Integer y;
     private Integer x;
@@ -24,7 +24,16 @@ public class Enemy {
         this.x = x;
     }
 
-    public Enemy(){}
+    public Position(Integer y, Integer x){
+        this.y = y;
+        this.x = x;
+    }
+    public Position(){}
 
-
+    public List<Integer> playerPosition(){
+        List<Integer> position = new ArrayList<>();
+        position.add(this.y);
+        position.add(this.x);
+        return position;
+    }
 }

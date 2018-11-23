@@ -1,12 +1,10 @@
 package com.pep.restapi.domain.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Enemy {
-
+public class Invader {
+    
     private Integer y;
     private Integer x;
+    private Boolean neutral;
 
     public Integer getY() {
         return y;
@@ -24,7 +22,13 @@ public class Enemy {
         this.x = x;
     }
 
-    public Enemy(){}
+    public Boolean getNeutral() {
+        return neutral;
+    }
 
+    public void setNeutral(Boolean neutral) {
+        this.neutral = neutral;
+    }
 
+    public Invader(){}
 }

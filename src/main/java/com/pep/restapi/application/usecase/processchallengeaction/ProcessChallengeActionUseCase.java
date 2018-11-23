@@ -30,5 +30,7 @@ public class ProcessChallengeActionUseCase implements UseCase<ProcessChallengeAc
         ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(actions.get(randomNumber));
 
         return reponse;
+
+
     }
 }

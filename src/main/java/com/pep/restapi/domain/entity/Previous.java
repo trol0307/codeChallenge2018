@@ -3,7 +3,7 @@ package com.pep.restapi.domain.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy {
+public class Previous {
 
     private Integer y;
     private Integer x;
@@ -24,7 +24,6 @@ public class Enemy {
         this.x = x;
     }
 
-    public Enemy(){}
-
+    public Previous(){}
 
 }

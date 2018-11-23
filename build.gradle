@@ -71,6 +71,9 @@ dependencies {
 
 	//Spring Boot
 	implementation('org.springframework.boot:spring-boot-starter')
+	implementation('org.codehaus.jackson:jackson-mapper-asl:1.9.10')
+	implementation('org.codehaus.jackson:jackson-databind:1.9.10')
+
 
 	// Health, metrics, web server...
 	implementation('org.springframework.boot:spring-boot-starter-web')
