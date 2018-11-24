@@ -84,7 +84,7 @@ public class MapConstructor {
 
     public void setPlayer(){
 
-        map.setElementOnMap(player.getPosition().getY(), player.getPosition().getX(),"enemy",true);
+        map.setElementOnMap(player.getPosition().getY(), player.getPosition().getX(),"player",true);
 
     }
 }
