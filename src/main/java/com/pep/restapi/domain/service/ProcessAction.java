@@ -18,7 +18,7 @@ public class ProcessAction {
 
     private Radar radar;
 
-    public String run(GamePost gamepost){
+    public void run(GamePost gamepost){
 
         partida = Partida.partidaExist(gamepost);
 
@@ -37,14 +37,7 @@ public class ProcessAction {
         Distance closestInvader = radar.closestInvaderData();
         System.out.println("closest enemy at:" + closestEnemy.toString());
         System.out.println("closest invader at:" + closestInvader.toString());
-
-        if (closestEnemy.getTargetActive() && !closestEnemy.getBarrier() && gamepost.getPlayer().getFire()){
-            return "fire-"+closestEnemy.getDirection();
-        } else {
-            System.out.println("closestEmptySpace at:");
-            return "left";
-
-        }
+        System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
 
 
     }
