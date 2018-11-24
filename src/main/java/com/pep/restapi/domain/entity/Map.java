@@ -53,8 +53,15 @@ public class Map{
         this.grid = new char[mapHeight][mapWidth];
     }
 
-    public void setElementOnMap(Integer y, Integer x, Character element){
-        grid[y][x] = element;
+    public void setElementOnMap(Integer y, Integer x, String element, Boolean visible){
+        switch (element){
+            case "walls":
+                grid[y][x] = visible ? (char)0x2588: (char)0x2593;
+                break;
+            case "space":
+                grid[y][x] = visible ? (char)0x2591: (char)0x2592;
+
+        }
     }
 
     public Character getMapElement(Integer y, Integer x){

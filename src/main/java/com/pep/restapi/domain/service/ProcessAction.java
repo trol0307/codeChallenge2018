@@ -16,7 +16,7 @@ public class ProcessAction {
     public String run(GamePost gamepost){
         partida = Partida.partidaExist(gamepost);
         map = partida.map();
-        MapConstructor mapConstructor = new MapConstructor(map,gamepost.getBoard().getWalls());
+        MapConstructor mapConstructor = new MapConstructor(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea());
         mapConstructor.init();
         mapConstructor.setWalls();
         ViewMap.View(map);
