@@ -6,6 +6,16 @@ public class Distance {
 
     private Integer xDist;
 
+    private Boolean targetActive;
+
+    public Boolean getTargetActive() {
+        return targetActive;
+    }
+
+    public void setTargetActive(Boolean targetActive) {
+        this.targetActive = targetActive;
+    }
+
     private Integer dist;
 
     private String direction;

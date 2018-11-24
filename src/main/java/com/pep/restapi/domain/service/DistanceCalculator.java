@@ -23,6 +23,10 @@ public class DistanceCalculator {
 
         distance.setDist(y+x);
 
+        if (y==0 || x==0) {
+            distance.setTargetActive(true);
+        }
+
         return distance;
     }
 

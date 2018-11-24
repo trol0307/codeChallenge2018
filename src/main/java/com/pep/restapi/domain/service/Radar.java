@@ -3,7 +3,9 @@ package com.pep.restapi.domain.service;
 import com.pep.restapi.domain.entity.*;
 import com.pep.restapi.domain.valueobjects.Distance;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Radar {
 
@@ -54,5 +56,24 @@ public class Radar {
             }
         }
         return closestInvaderRadarInfo;
+    }
+
+    public String closestEmptySpace(){
+
+
+        Distance distRight = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getX()+1);
+        Distance distLeft = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getX()-1);
+        Distance distUp = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY()-1,player.getPosition().getX());
+        Distance distDown = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY()+1,player.getPosition().getX());
+        List<String> freePositions = new ArrayList<>();
+        if (!distRight.getBarrier()) {freePositions.add("right");}
+        if (!distLeft.getBarrier()) {freePositions.add("left");}
+        if (!distUp.getBarrier()) {freePositions.add("up");}
+        if (!distDown.getBarrier()) {freePositions.add("down");}
+        Random rand = new Random();
+
+        Integer randomNumber = rand.nextInt(freePositions.size()-1)+1;
+
+        return freePositions.get(randomNumber);
     }
 }
