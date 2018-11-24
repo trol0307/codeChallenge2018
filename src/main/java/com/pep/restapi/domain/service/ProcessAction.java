@@ -41,8 +41,8 @@ public class ProcessAction {
         if (closestEnemy.getTargetActive() && !closestEnemy.getBarrier() && gamepost.getPlayer().getFire()){
             return "fire-"+closestEnemy.getDirection();
         } else {
-            System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
-            return radar.closestEmptySpace();
+            System.out.println("closestEmptySpace at:");
+            return "left";
 
         }
 
