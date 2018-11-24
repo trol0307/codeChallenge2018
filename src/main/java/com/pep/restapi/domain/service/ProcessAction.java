@@ -19,6 +19,7 @@ public class ProcessAction {
         MapConstructor mapConstructor = new MapConstructor(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders());
         mapConstructor.init();
         mapConstructor.setWalls();
+        mapConstructor.setInvaders();
         ViewMap.View(map);
 
         return "fet";
