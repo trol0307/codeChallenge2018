@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 public class ProcessAction {
 
     private Partida partida;
+
     private Map map;
-    private MapRow maprow;
-    private Player player;
 
     private Integer distance;
 
     private Radar radar;
 
-    public String run(GamePost gamepost){
+    public void run(GamePost gamepost){
+
         partida = Partida.partidaExist(gamepost);
+
         map = partida.map();
-        player = gamepost.getPlayer();
 
         MapConstructor mapConstructor = new MapConstructor(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders(),gamepost.getPlayers(),gamepost.getPlayer()  );
         mapConstructor.init();
@@ -37,13 +37,14 @@ public class ProcessAction {
         Distance closestInvader = radar.closestInvaderData();
         System.out.println("closest enemy at:" + closestEnemy.toString());
         System.out.println("closest invader at:" + closestInvader.toString());
-        if (closestEnemy.getTargetActive() && !closestEnemy.getBarrier() && player.getFire()){
+        /*
+        if (closestEnemy.getTargetActive() && !closestEnemy.getBarrier() && gamepost.getPlayer().getFire()){
             return "fire-"+closestEnemy.getDirection();
         } else {
-            System.out.println("closestEmptySpace  at:" + radar.closestEmptySpace());
+            System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
             return radar.closestEmptySpace();
 
-        }
+        }*/
 
 
     }
