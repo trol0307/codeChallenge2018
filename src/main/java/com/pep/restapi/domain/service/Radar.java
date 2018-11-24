@@ -60,16 +60,11 @@ public class Radar {
 
     public String closestEmptySpace(){
 
-
-        Distance distRight = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getX()+1);
-        Distance distLeft = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getX()-1);
-        Distance distUp = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY()-1,player.getPosition().getX());
-        Distance distDown = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),player.getPosition().getY()+1,player.getPosition().getX());
         List<String> freePositions = new ArrayList<>();
-        if (!distRight.getBarrier()) {freePositions.add("right");}
-        if (!distLeft.getBarrier()) {freePositions.add("left");}
-        if (!distUp.getBarrier()) {freePositions.add("up");}
-        if (!distDown.getBarrier()) {freePositions.add("down");}
+        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()-1)=="space") {freePositions.add("right");}
+        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()+1)=="space") {freePositions.add("left");}
+        if (map.getMapElement(player.getPosition().getY()-1,player.getPosition().getX())=="space") {freePositions.add("up");}
+        if (map.getMapElement(player.getPosition().getY()+1,player.getPosition().getX())=="space") {freePositions.add("down");}
         Random rand = new Random();
 
         Integer randomNumber = rand.nextInt(freePositions.size()-1)+1;
