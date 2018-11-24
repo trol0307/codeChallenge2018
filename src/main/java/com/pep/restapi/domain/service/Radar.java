@@ -61,8 +61,8 @@ public class Radar {
     public String closestEmptySpace(){
 
         List<String> freePositions = new ArrayList<>();
-        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()-1)=="space") {freePositions.add("right");}
-        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()+1)=="space") {freePositions.add("left");}
+        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()+1)=="space") {freePositions.add("right");}
+        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()-1)=="space") {freePositions.add("left");}
         if (map.getMapElement(player.getPosition().getY()-1,player.getPosition().getX())=="space") {freePositions.add("up");}
         if (map.getMapElement(player.getPosition().getY()+1,player.getPosition().getX())=="space") {freePositions.add("down");}
         Random rand = new Random();
