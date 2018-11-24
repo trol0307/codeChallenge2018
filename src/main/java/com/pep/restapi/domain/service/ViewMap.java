@@ -15,7 +15,7 @@ public class ViewMap {
         for (Integer y=0;y<map.getMapHeight();y++){
             StringBuilder rowBuilder = new StringBuilder();
             for (Integer x=0;x<map.getMapWidth();x++){
-                rowBuilder.append(map.getMapElement(y,x));
+                rowBuilder.append(map.getMapChar(y,x));
             }
             System.out.println(rowBuilder.toString());
         }

@@ -76,8 +76,32 @@ public class Map{
         }
     }
 
-    public Character getMapElement(Integer y, Integer x){
+    public Character getMapChar(Integer y, Integer x){
         return grid[y][x];
+    }
+
+    public String getMapElement(Integer y, Integer x){
+
+        char element = grid[y][x];
+        switch (element){
+            case (char)0x2588:
+                return "wall";
+            case (char)0x2593:
+                return "wall";
+            case (char)0x2591:
+                return "space";
+            case (char)0x2592:
+                return "space";
+            case (char)0x16E5:
+                return "invader";
+            case (char)0x16DD:
+                return "invader-neutral";
+            case (char)0x16C4:
+                return "enemy";
+            case (char)0x263F:
+                return "player";
+        }
+        return "";
     }
 
 }

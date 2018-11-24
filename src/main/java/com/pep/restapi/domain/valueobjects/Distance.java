@@ -2,16 +2,53 @@ package com.pep.restapi.domain.valueobjects;
 
 public class Distance {
 
+    private Integer yDist;
 
+    private Integer xDist;
 
-    public static Integer Distance(Integer yOrigin, Integer xOrigin, Integer yTarget, Integer xTarget){
+    private Integer dist;
 
-        Integer yDiff = yTarget - yOrigin;
-        Integer xDiff = xTarget - xOrigin;
+    private String direction;
 
-        if (yDiff<0) yDiff=yDiff*-1;
-        if (xDiff<0) xDiff=xDiff*-1;
+    private Boolean barrier;
 
-        return yDiff + xDiff;
+    public Integer getyDist() {
+        return yDist;
+    }
+
+    public void setyDist(Integer yDist) {
+        this.yDist = yDist;
+    }
+
+    public Integer getxDist() {
+        return xDist;
+    }
+
+    public void setxDist(Integer xDist) {
+        this.xDist = xDist;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public Boolean getBarrier() {
+        return barrier;
+    }
+
+    public void setBarrier(Boolean barrier) {
+        this.barrier = barrier;
+    }
+
+    public Integer getDist() {
+        return dist;
+    }
+
+    public void setDist(Integer dist) {
+        this.dist = dist;
     }
 }
