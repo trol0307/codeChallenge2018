@@ -20,7 +20,7 @@ public class ProcessChallengeActionUseCase implements UseCase<ProcessChallengeAc
     }
     public ProcessChallengeActionResponse execute(ProcessChallengeActionRequest request){
 
-        
+
         Random rand = new Random();
 
         Integer randomNumber = rand.nextInt(7)+1;
