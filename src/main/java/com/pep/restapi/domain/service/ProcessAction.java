@@ -40,7 +40,9 @@ public class ProcessAction {
         if (closestEnemy.getTargetActive() && !closestEnemy.getBarrier() && player.getFire()){
             return "fire-"+closestEnemy.getDirection();
         } else {
+            System.out.println("closestEmptySpace  at:" + radar.closestEmptySpace());
             return radar.closestEmptySpace();
+
         }
 
 
