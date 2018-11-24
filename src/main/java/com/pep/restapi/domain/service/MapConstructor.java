@@ -1,6 +1,7 @@
 package com.pep.restapi.domain.service;
 
 import com.pep.restapi.domain.entity.Area;
+import com.pep.restapi.domain.entity.Invader;
 import com.pep.restapi.domain.entity.Map;
 import com.pep.restapi.domain.entity.WallPosition;
 
@@ -12,12 +13,15 @@ public class MapConstructor {
 
     private List<WallPosition> walls;
 
+    private List<Invader> invaders;
+
     private Area visbleArea;
     
-    public MapConstructor(Map map, List<WallPosition> walls, Area visbleArea){
+    public MapConstructor(Map map, List<WallPosition> walls, Area visbleArea, List<Invader> invaders){
         this.map = map;
         this.walls = walls;
         this.visbleArea = visbleArea;
+        this.invaders = invaders;
     }
 
     private Boolean checkVisibility(Integer y, Integer x){
@@ -26,6 +30,14 @@ public class MapConstructor {
             return true;
         }
         return false;
+    }
+
+    private String checkInvader(Invader invader){
+
+        if (invader.getNeutral()) {
+            return "invader-neutral";
+        }
+        return "invader";
     }
 
     public void init(){
@@ -48,6 +60,14 @@ public class MapConstructor {
         for (WallPosition wallPosition : walls)
         {
             map.setElementOnMap(wallPosition.getY(), wallPosition.getX(),"walls",checkVisibility(wallPosition.getY(),wallPosition.getX()));
+        }
+    }
+
+    public void setInvaders(){
+
+        for (Invader invader : invaders)
+        {
+            map.setElementOnMap(invader.getY(), invader.getX(),checkInvader(invader),checkVisibility(invader.getY(),invader.getX()));
         }
     }
 }

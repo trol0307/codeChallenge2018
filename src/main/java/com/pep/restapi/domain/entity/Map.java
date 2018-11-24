@@ -60,7 +60,13 @@ public class Map{
                 break;
             case "space":
                 grid[y][x] = visible ? (char)0x2591: (char)0x2592;
-
+                break;
+            case "invader":
+                grid[y][x] = visible ? (char)0x1783: (char)0x1783;
+                break;
+            case "invader-neutral":
+                grid[y][x] = visible ? (char)0x1780: (char)0x1780;
+                break;
         }
     }
 
