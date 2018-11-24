@@ -1,9 +1,6 @@
 package com.pep.restapi.domain.service;
 
-import com.pep.restapi.domain.entity.Area;
-import com.pep.restapi.domain.entity.Invader;
-import com.pep.restapi.domain.entity.Map;
-import com.pep.restapi.domain.entity.WallPosition;
+import com.pep.restapi.domain.entity.*;
 
 import java.util.List;
 
@@ -15,13 +12,19 @@ public class MapConstructor {
 
     private List<Invader> invaders;
 
+    private List<Enemy> enemies;
+
+    private Player player;
+
     private Area visbleArea;
     
-    public MapConstructor(Map map, List<WallPosition> walls, Area visbleArea, List<Invader> invaders){
+    public MapConstructor(Map map, List<WallPosition> walls, Area visbleArea, List<Invader> invaders, List<Enemy> enemies, Player player){
         this.map = map;
         this.walls = walls;
         this.visbleArea = visbleArea;
         this.invaders = invaders;
+        this.enemies = enemies;
+        this.player = player;
     }
 
     private Boolean checkVisibility(Integer y, Integer x){
@@ -69,5 +72,19 @@ public class MapConstructor {
         {
             map.setElementOnMap(invader.getY(), invader.getX(),checkInvader(invader),checkVisibility(invader.getY(),invader.getX()));
         }
+    }
+
+    public void setEnemies(){
+
+        for (Enemy enemy : enemies)
+        {
+            map.setElementOnMap(enemy.getY(), enemy.getX(),"enemy",checkVisibility(enemy.getY(),enemy.getX()));
+        }
+    }
+
+    public void setPlayer(){
+
+        map.setElementOnMap(player.getPosition().getY(), player.getPosition().getX(),"enemy",true);
+
     }
 }

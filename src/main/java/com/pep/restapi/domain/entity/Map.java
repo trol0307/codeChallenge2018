@@ -62,10 +62,16 @@ public class Map{
                 grid[y][x] = visible ? (char)0x2591: (char)0x2592;
                 break;
             case "invader":
-                grid[y][x] = visible ? (char)0x1783: (char)0x1783;
+                grid[y][x] = visible ? (char)0x16E5: (char)0x16E5;
                 break;
             case "invader-neutral":
-                grid[y][x] = visible ? (char)0x1780: (char)0x1780;
+                grid[y][x] = visible ? (char)0x16DD: (char)0x16DD;
+                break;
+            case "enemy":
+                grid[y][x] = visible ? (char)0x16C4: (char)0x16C4;
+                break;
+            case "player":
+                grid[y][x] = visible ? (char)0x263F: (char)0x263F;
                 break;
         }
     }
