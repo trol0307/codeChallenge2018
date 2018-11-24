@@ -19,7 +19,7 @@ public class DistanceCalculator {
         distance.setyDist(y);
         distance.setxDist(x);
 
-        distance.setBarrier(barrier(map,y,x));
+        distance.setBarrier(barrier(map,yOrigin, xOrigin, yTarget, xTarget));
 
         distance.setDist(y+x);
 
@@ -54,15 +54,36 @@ public class DistanceCalculator {
         }
     }
 
-    private static Boolean barrier(Map map, Integer y,Integer x){
+    private static Boolean barrier(Map map, Integer yOrigin, Integer xOrigin, Integer yTarget, Integer xTarget){
+        Integer y = yTarget - yOrigin;
+        Integer x = xTarget - xOrigin;
+        Integer yDist;
+        Integer xDist;
+
+        if (y<0) yDist=y*-1;
+        if (x<0) xDist=x*-1;
+
 
         if (y<=x) {
-            for (Integer i=0;i<x;i++){
-                if ("wall".equals(map.getMapElement(y,i))) return true;
+            if (x>0) {
+                for (Integer i=xOrigin;i<xTarget;i++){
+                    if ("wall".equals(map.getMapElement(yOrigin,i))) return true;
+                }
+            } else {
+                for (Integer i=xOrigin;i>xTarget;i--){
+                    if ("wall".equals(map.getMapElement(yOrigin,i))) return true;
+                }
             }
+
         } else if (y>x) {
-            for (Integer i=0;i<y;i++){
-                if ("wall".equals(map.getMapElement(y,i))) return true;
+            if (y>0) {
+                for (Integer i=yOrigin;i<yTarget;i++){
+                    if ("wall".equals(map.getMapElement(i,xOrigin))) return true;
+                }
+            } else {
+                for (Integer i=yOrigin;i>yTarget;i--){
+                    if ("wall".equals(map.getMapElement(i,xOrigin))) return true;
+                }
             }
         }
         return false;

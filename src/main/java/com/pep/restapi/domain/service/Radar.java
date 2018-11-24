@@ -29,12 +29,13 @@ public class Radar {
     }
 
     public Distance closestEnemyData(){
-        Integer minDistance = 20;
+
         Distance closestEnemyRadarInfo = new Distance();
+        closestEnemyRadarInfo.setDist(20);
         for (Enemy enemy : enemies)
         {
             Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),enemy.getY(),enemy.getX());
-            if (dist.getDist()<minDistance && !dist.getBarrier()) {
+            if (dist.getDist()<closestEnemyRadarInfo.getDist() ) {
                 closestEnemyRadarInfo = dist;
             }
         }
@@ -42,12 +43,13 @@ public class Radar {
     }
 
     public Distance closestInvaderData(){
-        Integer minDistance = 20;
+
         Distance closestInvaderRadarInfo = new Distance();
+        closestInvaderRadarInfo.setDist(20);
         for (Invader invader : invaders)
         {
             Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),invader.getY(),invader.getX());
-            if (dist.getDist()<minDistance && !dist.getBarrier()) {
+            if (dist.getDist()<closestInvaderRadarInfo.getDist() ) {
                 closestInvaderRadarInfo = dist;
             }
         }
