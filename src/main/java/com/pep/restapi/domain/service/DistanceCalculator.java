@@ -26,6 +26,9 @@ public class DistanceCalculator {
         if (y==0 || x==0) {
             distance.setTargetActive(true);
         }
+        else {
+            distance.setTargetActive(false);
+        }
 
         return distance;
     }
