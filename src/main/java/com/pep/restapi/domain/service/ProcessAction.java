@@ -38,13 +38,10 @@ public class ProcessAction {
         System.out.println("closest enemy at:" + closestEnemy.toString());
         System.out.println("closest invader at:" + closestInvader.toString());
         System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
-        if (!closestEnemy.getBarrier() && gamepost.getPlayer().getFire()){
-            return "fire-"+closestEnemy.getDirection();
-        } else {
 
-            return radar.closestEmptySpace();
+        return radar.closestEmptySpace();
 
-        }
+
 
 
     }
