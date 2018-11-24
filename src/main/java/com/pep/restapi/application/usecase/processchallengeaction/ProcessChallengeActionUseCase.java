@@ -19,8 +19,8 @@ public class ProcessChallengeActionUseCase implements UseCase<ProcessChallengeAc
         this.processAction = processAction;
     }
     public ProcessChallengeActionResponse execute(ProcessChallengeActionRequest request){
-        processAction.run(request.gamePost());
 
+/*
         Random rand = new Random();
 
         Integer randomNumber = rand.nextInt(7)+1;
@@ -36,7 +36,9 @@ public class ProcessChallengeActionUseCase implements UseCase<ProcessChallengeAc
         actions.add("fire-right");
         actions.add("fire-left");
 
-        ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(actions.get(randomNumber));
+        ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(actions.get(randomNumber));*/
+        ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(processAction.run(request.gamePost()));
+
 
         return reponse;
 
