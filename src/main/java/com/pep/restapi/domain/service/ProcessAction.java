@@ -2,6 +2,7 @@ package com.pep.restapi.domain.service;
 
 
 import com.pep.restapi.domain.entity.*;
+import com.pep.restapi.domain.valueobjects.Distance;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -29,10 +30,11 @@ public class ProcessAction {
         Radar radar = new Radar(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders(),gamepost.getPlayers(),gamepost.getPlayer()  );
 
         ViewMap.View(map);
+        Distance closestEnemy = radar.closestEnemyData();
+        Distance closestInvader = radar.closestInvaderData();
 
-        System.out.println("closest enemy at:" + radar.closestEnemy());
-        System.out.println("closest invader at:" + radar.closestInvader());
-
+        System.out.println("closest enemy at:" + closestEnemy.toString());
+        System.out.println("closest invader at:" + closestInvader.toString());
 
     }
 

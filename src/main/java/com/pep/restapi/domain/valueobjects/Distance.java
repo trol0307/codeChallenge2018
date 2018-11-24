@@ -12,6 +12,17 @@ public class Distance {
 
     private Boolean barrier;
 
+    @Override
+    public String toString() {
+        return "Distance{" +
+                "yDist=" + yDist +
+                ", xDist=" + xDist +
+                ", dist=" + dist +
+                ", direction='" + direction + '\'' +
+                ", barrier=" + barrier +
+                '}';
+    }
+
     public Integer getyDist() {
         return yDist;
     }

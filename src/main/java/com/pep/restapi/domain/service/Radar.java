@@ -28,23 +28,29 @@ public class Radar {
         this.player = player;
     }
 
-    public Integer closestEnemy(){
+    public Distance closestEnemyData(){
         Integer minDistance = 20;
+        Distance closestEnemyRadarInfo = new Distance();
         for (Enemy enemy : enemies)
         {
             Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),enemy.getY(),enemy.getX());
-            minDistance = (minDistance>dist.getDist())? dist.getDist() : minDistance;
+            if (dist.getDist()<minDistance && !dist.getBarrier()) {
+                closestEnemyRadarInfo = dist;
+            }
         }
-        return minDistance;
+        return closestEnemyRadarInfo;
     }
 
-    public Integer closestInvader(){
+    public Distance closestInvaderData(){
         Integer minDistance = 20;
+        Distance closestInvaderRadarInfo = new Distance();
         for (Invader invader : invaders)
         {
             Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),invader.getY(),invader.getX());
-            minDistance = (minDistance>dist.getDist())? dist.getDist() : minDistance;
+            if (dist.getDist()<minDistance && !dist.getBarrier()) {
+                closestInvaderRadarInfo = dist;
+            }
         }
-        return minDistance;
+        return closestInvaderRadarInfo;
     }
 }
