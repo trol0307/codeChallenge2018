@@ -107,25 +107,26 @@ public class Map{
     }
 
     public String getMapElement(Coordinates coordinates){
-
-        char element = grid[coordinates.y()][coordinates.x()];
-        switch (element){
-            case (char)0x2588:
-                return "wall";
-            case (char)0x2593:
-                return "wall";
-            case (char)0x2591:
-                return "space";
-            case (char)0x2592:
-                return "space";
-            case (char)0x16E5:
-                return "invader";
-            case (char)0x16DD:
-                return "invader-neutral";
-            case (char)0x16C4:
-                return "enemy";
-            case (char)0x263F:
-                return "player";
+        if (coordinates.x()>=0 && coordinates.y()>=0){
+            char element = grid[coordinates.y()][coordinates.x()];
+            switch (element){
+                case (char)0x2588:
+                    return "wall";
+                case (char)0x2593:
+                    return "wall";
+                case (char)0x2591:
+                    return "space";
+                case (char)0x2592:
+                    return "space";
+                case (char)0x16E5:
+                    return "invader";
+                case (char)0x16DD:
+                    return "invader-neutral";
+                case (char)0x16C4:
+                    return "enemy";
+                case (char)0x263F:
+                    return "player";
+            }
         }
         return "";
     }
