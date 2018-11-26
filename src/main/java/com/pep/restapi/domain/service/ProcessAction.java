@@ -30,20 +30,35 @@ public class ProcessAction {
         mapConstructor.setInvaders();
         mapConstructor.setEnemies();
         mapConstructor.setPlayer();
+        ViewMap.View(map);
         Radar radar = new Radar(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders(),gamepost.getPlayers(),gamepost.getPlayer()  );
 
-        ViewMap.View(map);
-        Distance closestEnemy = radar.closestEnemyData();
-        Distance closestInvader = radar.closestInvaderData();
-        System.out.println("closest enemy at:" + closestEnemy.toString());
-        System.out.println("closest invader at:" + closestInvader.toString());
+
+
+        System.out.println("closest enemy at:" + radar.closestEnemy().toString());
+        System.out.println("closest invader at:" + radar.closestInvader().toString());
         System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
 
-        return radar.closestEmptySpace();
+        // tinc la informació dels enemics i dels invaders més perillosos, he de veure quin tinc més a prop i si es disaparable, si em pot disparar un d'ells aleshores he de fugir fent servir les dades d'empty space
 
+        Boolean activeEnemy = radar.closestEnemy().getDist()<20 ? true : false;
 
+        Boolean activeInvader = radar.closestInvader().getDist()<20 ? true : false;
 
-
+        if (activeEnemy && activeInvader){
+            if (radar.closestEnemy().getDist()<=radar.closestInvader().getDist()){
+                return "fire-"+radar.closestEnemy().getDirection();
+            } else {
+                return "fire-"+radar.closestInvader().getDirection();
+            }
+        } else if (activeEnemy && !activeInvader){
+            return "fire-"+radar.closestEnemy().getDirection();
+        } else if (activeInvader && !activeEnemy){
+            return "fire-"+radar.closestInvader().getDirection();
+        } else {
+            return radar.closestEmptySpace();
+        }
+        
     }
 
 }

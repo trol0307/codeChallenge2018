@@ -23,7 +23,7 @@ public class DistanceCalculator {
 
         distance.setDist(y+x);
 
-        if (y==0 || x==0) {
+        if ((y==0 && x<=5) || (y<=5 && x==0)) {
             distance.setTargetActive(true);
         }
         else {

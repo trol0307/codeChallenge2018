@@ -21,41 +21,75 @@ public class Radar {
 
     private Area visbleArea;
 
-    public Radar(Map map, List<WallPosition> walls, Area visbleArea, List<Invader> invaders, List<Enemy> enemies, Player player){
+    private Distance closestEnemy;
+
+    private Distance closestInvader;
+
+    private Distance closestNeutralInvader;
+
+    private Distance closestSpace;
+
+    private List<String> freePositions = new ArrayList<>();
+
+    public Radar(Map map, List<WallPosition> walls, Area visibleArea, List<Invader> invaders, List<Enemy> enemies, Player player){
         this.map = map;
         this.walls = walls;
-        this.visbleArea = visbleArea;
+        this.visbleArea = visibleArea;
         this.invaders = invaders;
         this.enemies = enemies;
         this.player = player;
-    }
+        closestEnemy = new Distance();
+        closestEnemy.setDist(20);
+        closestNeutralInvader = new Distance();
+        closestNeutralInvader.setDist(20);
+        closestInvader = new Distance();
+        closestInvader.setDist(20);
+        closestSpace = new Distance();
+        closestSpace.setDist(20);
 
-    public Distance closestEnemyData(){
+        String element ;
 
-        Distance closestEnemyRadarInfo = new Distance();
-        closestEnemyRadarInfo.setDist(20);
-        for (Enemy enemy : enemies)
-        {
-            Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),enemy.getY(),enemy.getX());
-            if (dist.getDist()<closestEnemyRadarInfo.getDist() ) {
-                closestEnemyRadarInfo = dist;
+        for(Integer i = visbleArea.getY1(); i<visbleArea.getY2();i++){
+            for(Integer t = visbleArea.getX1(); t<visbleArea.getX2(); t++){
+                element = map.getMapElement(i, t);
+                switch(element){
+                    case "invader":
+                        Distance distInvader = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),i,t);
+                        if (distInvader.getDist()<closestInvader.getDist() && !distInvader.getBarrier()) {
+                            closestInvader = distInvader;
+                        }
+                        break;
+                    case "invader-neutral":
+                        Distance distNeutralInvader = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),i,t);
+                        if (distNeutralInvader.getDist()<closestNeutralInvader.getDist() && !distNeutralInvader.getBarrier()) {
+                            closestNeutralInvader = distNeutralInvader;
+                        }
+                        break;
+                    case "enemy":
+                        Distance distEnemy = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),i,t);
+                        if (distEnemy.getDist()<closestEnemy.getDist() && !distEnemy.getBarrier() && distEnemy.getTargetActive()) {
+                            closestEnemy = distEnemy;
+                        }
+                        break;
+
+                }
             }
         }
-        return closestEnemyRadarInfo;
     }
 
-    public Distance closestInvaderData(){
+    public Distance closestEnemy(){
 
-        Distance closestInvaderRadarInfo = new Distance();
-        closestInvaderRadarInfo.setDist(20);
-        for (Invader invader : invaders)
-        {
-            Distance dist = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),invader.getY(),invader.getX());
-            if (dist.getDist()<closestInvaderRadarInfo.getDist() ) {
-                closestInvaderRadarInfo = dist;
-            }
-        }
-        return closestInvaderRadarInfo;
+        return closestEnemy;
+    }
+
+    public Distance closestInvader(){
+
+        return closestInvader;
+    }
+
+    public Distance closestNeutralInvader(){
+
+        return closestNeutralInvader;
     }
 
     public String closestEmptySpace(){

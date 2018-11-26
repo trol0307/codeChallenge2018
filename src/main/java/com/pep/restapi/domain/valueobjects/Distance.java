@@ -8,30 +8,11 @@ public class Distance {
 
     private Boolean targetActive;
 
-    public Boolean getTargetActive() {
-        return targetActive;
-    }
-
-    public void setTargetActive(Boolean targetActive) {
-        this.targetActive = targetActive;
-    }
-
     private Integer dist;
 
     private String direction;
 
     private Boolean barrier;
-
-    @Override
-    public String toString() {
-        return "Distance{" +
-                "yDist=" + yDist +
-                ", xDist=" + xDist +
-                ", dist=" + dist +
-                ", direction='" + direction + '\'' +
-                ", barrier=" + barrier +
-                '}';
-    }
 
     public Integer getyDist() {
         return yDist;
@@ -47,6 +28,22 @@ public class Distance {
 
     public void setxDist(Integer xDist) {
         this.xDist = xDist;
+    }
+
+    public Boolean getTargetActive() {
+        return targetActive;
+    }
+
+    public void setTargetActive(Boolean targetActive) {
+        this.targetActive = targetActive;
+    }
+
+    public Integer getDist() {
+        return dist;
+    }
+
+    public void setDist(Integer dist) {
+        this.dist = dist;
     }
 
     public String getDirection() {
@@ -65,11 +62,15 @@ public class Distance {
         this.barrier = barrier;
     }
 
-    public Integer getDist() {
-        return dist;
-    }
-
-    public void setDist(Integer dist) {
-        this.dist = dist;
+    @Override
+    public String toString() {
+        return "Distance{" +
+                "yDist=" + yDist +
+                ", xDist=" + xDist +
+                ", targetActive=" + targetActive +
+                ", dist=" + dist +
+                ", direction='" + direction + '\'' +
+                ", barrier=" + barrier +
+                '}';
     }
 }
