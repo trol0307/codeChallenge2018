@@ -1,13 +1,12 @@
 package com.pep.restapi.domain.service;
 
 import com.pep.restapi.domain.entity.*;
+import com.pep.restapi.domain.entity.Map;
 import com.pep.restapi.domain.valueobjects.Area;
 import com.pep.restapi.domain.valueobjects.Coordinates;
 import com.pep.restapi.domain.valueobjects.Distance;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Radar {
 
@@ -95,42 +94,86 @@ public class Radar {
         return closestNeutralInvader;
     }
 
-    public String closestEmptySpace(){
-
-        List<Coordinates> freePositions = new ArrayList<>();
-        Coordinates myPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX());
+    public Integer getFreeSpace(String direction){
+        Integer freespace=0;
         Coordinates myLastPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX());
+        Distance LastPositionDistance = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),myLastPosition.y(),myLastPosition.x());
+        if (LastPositionDistance.getDirection()==direction){
+            return 0;
+        } else {
+            switch(direction){
+                case "up":
 
-        Coordinates leftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
-        Coordinates rightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+1);
-        Coordinates upPosition = new Coordinates(player.getPrevious().getY()-1,player.getPrevious().getX());
-        Coordinates downPosition = new Coordinates(player.getPrevious().getY()+1,player.getPrevious().getX());
-
-        Coordinates leftLeftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-2);
-        Coordinates rightRightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+2);
-        Coordinates upUpPosition = new Coordinates(player.getPrevious().getY()-2,player.getPrevious().getX());
-        Coordinates downDownPosition = new Coordinates(player.getPrevious().getY()+2,player.getPrevious().getX());
-
-        if (map.getMapElement(leftPosition)=="space" && !leftPosition.equals(myLastPosition)) {freePositions.add(leftPosition);}
-        if (map.getMapElement(rightPosition)=="space" && !rightPosition.equals(myLastPosition)) {freePositions.add(rightPosition);}
-        if (map.getMapElement(upPosition)=="space" && !upPosition.equals(myLastPosition)) {freePositions.add(upPosition);}
-        if (map.getMapElement(downPosition)=="space" && !downPosition.equals(myLastPosition)) {freePositions.add(downPosition);}
-
-        if (freePositions.size()<2){
-            if (map.getMapElement(leftPosition)=="space" && map.getMapElement(leftLeftPosition)=="space") {freePositions.add(leftPosition);}
-            if (map.getMapElement(rightPosition)=="space" && map.getMapElement(rightRightPosition)=="space") {freePositions.add(rightPosition);}
-            if (map.getMapElement(upPosition)=="space" && map.getMapElement(upUpPosition)=="space") {freePositions.add(upPosition);}
-            if (map.getMapElement(downPosition)=="space" && map.getMapElement(downDownPosition)=="space") {freePositions.add(downPosition);}
+                    for (Integer i=1;i<5;i++){
+                        Coordinates newPosition = new Coordinates(player.getPrevious().getY()-i,player.getPrevious().getX());
+                        if (map.getMapElement(newPosition)=="space"){
+                            freespace++;
+                        } else {
+                            continue;
+                        }
+                    }
+                    break;
+                case "down":
+                    for (Integer i=1;i<5;i++){
+                        Coordinates newPosition = new Coordinates(player.getPrevious().getY()+i,player.getPrevious().getX());
+                        if (map.getMapElement(newPosition)=="space"){
+                            freespace++;
+                        } else {
+                            continue;
+                        }
+                    }
+                    break;
+                case "left":
+                    for (Integer i=1;i<5;i++){
+                        Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-i);
+                        if (map.getMapElement(newPosition)=="space"){
+                            freespace++;
+                        } else {
+                            continue;
+                        }
+                    }
+                    break;
+                case "right":
+                default:
+                    for (Integer i=1;i<5;i++){
+                        Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+i);
+                        if (map.getMapElement(newPosition)=="space"){
+                            freespace++;
+                        } else {
+                            continue;
+                        }
+                    }
+                    break;
+            }
+            return freespace;
         }
 
-        Random rand = new Random();
+    }
 
-        Integer randomNumber = rand.nextInt(freePositions.size()-1)+1;
+    public String closestEmptySpace(){
+        Integer maxFreeSpace=0;
+        Integer result;
+        String finalRoute="";
+        java.util.Map<String ,Integer> possibleDirections = new HashMap<>();
+        List<String> directions = new ArrayList<>();
+        directions.add("up");
+        directions.add("down");
+        directions.add("left");
+        directions.add("right");
 
-        Coordinates freeSpace = freePositions.get(randomNumber);
-        Distance distFreeSpace = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),freeSpace.y(),freeSpace.x());
+        for(String direction : directions){
+            result = getFreeSpace(direction);
+            possibleDirections.put(direction,result);
+        }
 
-        return distFreeSpace.getDirection();
+        int maxValueInMap=(Collections.max(possibleDirections.values()));  // This will return max value in the Hashmap
+        for (java.util.Map.Entry<String, Integer> entry : possibleDirections.entrySet()) {  // Itrate through hashmap
+            if (entry.getValue()==maxValueInMap) {
+                finalRoute=entry.getKey();     // Print the key with max value
+            }
+        }
+
+        return finalRoute;
     }
 
 }
