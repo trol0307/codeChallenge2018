@@ -41,7 +41,7 @@ public class ProcessAction {
 
         Boolean activeEnemy = radar.closestEnemy().getDist()<20 && radar.closestEnemy().getTargetActive()? true : false;
 
-        Boolean activeInvader = radar.closestInvader().getDist()<20 && radar.closestEnemy().getTargetActive()? true : false;
+        Boolean activeInvader = radar.closestInvader().getDist()<20 && radar.closestInvader().getTargetActive()? true : false;
 
         if (activeEnemy && activeInvader){
             System.out.println("closest active enemy at:" + radar.closestEnemy().toString());
