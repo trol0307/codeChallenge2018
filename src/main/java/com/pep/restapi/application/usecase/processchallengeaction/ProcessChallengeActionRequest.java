@@ -1,6 +1,6 @@
 package com.pep.restapi.application.usecase.processchallengeaction;
 
-import com.pep.restapi.domain.entity.GamePost;
+import com.pep.restapi.domain.valueobjects.GamePost;
 
 public class ProcessChallengeActionRequest {
 

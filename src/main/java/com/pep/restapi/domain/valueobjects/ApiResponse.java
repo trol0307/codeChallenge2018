@@ -1,4 +1,4 @@
-package com.pep.restapi.domain.entity;
+package com.pep.restapi.domain.valueobjects;
 
 public class ApiResponse {
 

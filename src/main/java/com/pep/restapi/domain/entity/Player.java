@@ -1,5 +1,7 @@
 package com.pep.restapi.domain.entity;
 
+import com.pep.restapi.domain.valueobjects.Area;
+
 import java.util.UUID;
 
 public class Player {
@@ -9,6 +11,18 @@ public class Player {
     private Previous Previous;
     private Area area;
     private Boolean fire;
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", position=" + position +
+                ", Previous=" + Previous +
+                ", area=" + area +
+                ", fire=" + fire +
+                '}';
+    }
 
     public UUID getId() {
         return id;

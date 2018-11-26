@@ -7,6 +7,14 @@ public class WallPosition {
     private Integer y;
     private Integer x;
 
+    @Override
+    public String toString() {
+        return "WallPosition{" +
+                "y=" + y +
+                ", x=" + x +
+                '}';
+    }
+
     public Integer getY() {
         return y;
     }

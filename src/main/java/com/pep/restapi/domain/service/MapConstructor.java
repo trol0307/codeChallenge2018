@@ -1,6 +1,7 @@
 package com.pep.restapi.domain.service;
 
 import com.pep.restapi.domain.entity.*;
+import com.pep.restapi.domain.valueobjects.Area;
 
 import java.util.List;
 

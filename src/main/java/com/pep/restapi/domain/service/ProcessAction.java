@@ -2,7 +2,7 @@ package com.pep.restapi.domain.service;
 
 
 import com.pep.restapi.domain.entity.*;
-import com.pep.restapi.domain.valueobjects.Distance;
+import com.pep.restapi.domain.valueobjects.GamePost;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -39,23 +39,28 @@ public class ProcessAction {
         System.out.println("closest invader at:" + radar.closestInvader().toString());
         System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
 
-        // tinc la informació dels enemics i dels invaders més perillosos, he de veure quin tinc més a prop i si es disaparable, si em pot disparar un d'ells aleshores he de fugir fent servir les dades d'empty space
-
         Boolean activeEnemy = radar.closestEnemy().getDist()<20 ? true : false;
 
         Boolean activeInvader = radar.closestInvader().getDist()<20 ? true : false;
 
         if (activeEnemy && activeInvader){
+            System.out.println("closest active enemy at:" + radar.closestEnemy().toString());
+            System.out.println("closest active invader at:" + radar.closestInvader().toString());
             if (radar.closestEnemy().getDist()<=radar.closestInvader().getDist()){
+                System.out.println("target active enemy at:" + radar.closestEnemy().toString());
                 return "fire-"+radar.closestEnemy().getDirection();
             } else {
+                System.out.println("target active invader at:" + radar.closestInvader().toString());
                 return "fire-"+radar.closestInvader().getDirection();
             }
         } else if (activeEnemy && !activeInvader){
+            System.out.println("target active enemy at:" + radar.closestEnemy().toString());
             return "fire-"+radar.closestEnemy().getDirection();
         } else if (activeInvader && !activeEnemy){
+            System.out.println("target active invader at:" + radar.closestInvader().toString());
             return "fire-"+radar.closestInvader().getDirection();
         } else {
+            System.out.println("target free space at:" + radar.closestEmptySpace());
             return radar.closestEmptySpace();
         }
 

@@ -9,6 +9,13 @@ public class Game {
 
     private UUID id;
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                '}';
+    }
+
     public UUID getId() {
         return id;
     }

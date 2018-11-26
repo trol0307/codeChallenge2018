@@ -8,6 +8,14 @@ public class Previous {
     private Integer y;
     private Integer x;
 
+    @Override
+    public String toString() {
+        return "Previous{" +
+                "y=" + y +
+                ", x=" + x +
+                '}';
+    }
+
     public Integer getY() {
         return y;
     }

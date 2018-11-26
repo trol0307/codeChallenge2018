@@ -1,6 +1,8 @@
 package com.pep.restapi.domain.entity;
 
 
+import com.pep.restapi.domain.valueobjects.GamePost;
+
 import java.util.UUID;
 
 public class Partida {

@@ -1,15 +1,12 @@
 package com.pep.restapi.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.fasterxml.jackson.databind.node.POJONode;
 import com.pep.restapi.application.usecase.getchallengeplayerinfo.GetChallengePlayerInfoRequest;
 import com.pep.restapi.application.usecase.getchallengeplayerinfo.GetChallengePlayerInfoResponse;
 import com.pep.restapi.application.usecase.getchallengeplayerinfo.GetChallengePlayerInfoUseCase;
 import com.pep.restapi.application.usecase.processchallengeaction.ProcessChallengeActionRequest;
 import com.pep.restapi.application.usecase.processchallengeaction.ProcessChallengeActionResponse;
 import com.pep.restapi.application.usecase.processchallengeaction.ProcessChallengeActionUseCase;
-import com.pep.restapi.domain.entity.GamePost;
+import com.pep.restapi.domain.valueobjects.GamePost;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

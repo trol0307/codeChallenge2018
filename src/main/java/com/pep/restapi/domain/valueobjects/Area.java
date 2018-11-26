@@ -1,4 +1,4 @@
-package com.pep.restapi.domain.entity;
+package com.pep.restapi.domain.valueobjects;
 
 import java.util.ArrayList;
 import java.util.List;

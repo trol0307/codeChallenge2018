@@ -7,6 +7,14 @@ public class Size {
     private Integer height;
     private Integer width;
 
+    @Override
+    public String toString() {
+        return "Size{" +
+                "height=" + height +
+                ", width=" + width +
+                '}';
+    }
+
     public Integer getHeight() {
         return height;
     }

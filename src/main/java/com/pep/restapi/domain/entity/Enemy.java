@@ -8,6 +8,14 @@ public class Enemy {
     private Integer y;
     private Integer x;
 
+    @Override
+    public String toString() {
+        return "Enemy{" +
+                "y=" + y +
+                ", x=" + x +
+                '}';
+    }
+
     public Integer getY() {
         return y;
     }

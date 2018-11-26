@@ -1,5 +1,7 @@
-package com.pep.restapi.domain.entity;
+package com.pep.restapi.domain.valueobjects;
 
+import com.pep.restapi.domain.entity.Size;
+import com.pep.restapi.domain.entity.WallPosition;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,6 +11,14 @@ public class Board {
 
     private Size size;
     private List<WallPosition> walls;
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "size=" + size +
+                ", walls=" + walls +
+                '}';
+    }
 
     public Size getSize() {
         return size;

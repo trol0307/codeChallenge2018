@@ -6,6 +6,15 @@ public class Invader {
     private Integer x;
     private Boolean neutral;
 
+    @Override
+    public String toString() {
+        return "Invader{" +
+                "y=" + y +
+                ", x=" + x +
+                ", neutral=" + neutral +
+                '}';
+    }
+
     public Integer getY() {
         return y;
     }

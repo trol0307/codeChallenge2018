@@ -1,4 +1,10 @@
-package com.pep.restapi.domain.entity;
+package com.pep.restapi.domain.valueobjects;
+
+import com.pep.restapi.domain.entity.Enemy;
+import com.pep.restapi.domain.entity.Game;
+import com.pep.restapi.domain.entity.Invader;
+import com.pep.restapi.domain.entity.Player;
+import com.pep.restapi.domain.valueobjects.Board;
 
 import java.util.List;
 
@@ -52,6 +58,17 @@ public class GamePost {
 
     public void setInvaders(List<Invader> invaders) {
         this.invaders = invaders;
+    }
+
+    @Override
+    public String toString() {
+        return "GamePost{" +
+                "game=" + game +
+                ", player=" + player +
+                ", board=" + board +
+                ", players=" + players +
+                ", invaders=" + invaders +
+                '}';
     }
 
     public GamePost(){};

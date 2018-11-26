@@ -37,6 +37,7 @@ public class ProcessChallengeActionUseCase implements UseCase<ProcessChallengeAc
         actions.add("fire-left");
 
         //ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(actions.get(randomNumber));
+        System.out.println("GamePost:"+request.gamePost().toString());
         ProcessChallengeActionResponse reponse = new ProcessChallengeActionResponse(processAction.run(request.gamePost()));
 
 
