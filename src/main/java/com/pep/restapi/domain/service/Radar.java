@@ -102,14 +102,27 @@ public class Radar {
         Coordinates myLastPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX());
 
         Coordinates leftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
-        Coordinates rightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
+        Coordinates rightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+1);
         Coordinates upPosition = new Coordinates(player.getPrevious().getY()-1,player.getPrevious().getX());
         Coordinates downPosition = new Coordinates(player.getPrevious().getY()+1,player.getPrevious().getX());
+
+        Coordinates leftLeftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-2);
+        Coordinates rightRightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+2);
+        Coordinates upUpPosition = new Coordinates(player.getPrevious().getY()-2,player.getPrevious().getX());
+        Coordinates downDownPosition = new Coordinates(player.getPrevious().getY()+2,player.getPrevious().getX());
 
         if (map.getMapElement(leftPosition)=="space" && !leftPosition.equals(myLastPosition)) {freePositions.add(leftPosition);}
         if (map.getMapElement(rightPosition)=="space" && !rightPosition.equals(myLastPosition)) {freePositions.add(rightPosition);}
         if (map.getMapElement(upPosition)=="space" && !upPosition.equals(myLastPosition)) {freePositions.add(upPosition);}
         if (map.getMapElement(downPosition)=="space" && !downPosition.equals(myLastPosition)) {freePositions.add(downPosition);}
+
+        if (freePositions.size()==0){
+            if (map.getMapElement(leftPosition)=="space" && map.getMapElement(leftLeftPosition)=="space") {freePositions.add(leftPosition);}
+            if (map.getMapElement(rightPosition)=="space" && map.getMapElement(rightRightPosition)=="space") {freePositions.add(rightPosition);}
+            if (map.getMapElement(upPosition)=="space" && map.getMapElement(upUpPosition)=="space") {freePositions.add(upPosition);}
+            if (map.getMapElement(downPosition)=="space" && map.getMapElement(downDownPosition)=="space") {freePositions.add(downPosition);}
+        }
+
         Random rand = new Random();
 
         Integer randomNumber = rand.nextInt(freePositions.size()-1)+1;
