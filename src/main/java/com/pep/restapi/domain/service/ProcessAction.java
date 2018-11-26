@@ -38,6 +38,9 @@ public class ProcessAction {
 
         Boolean activeEnemy = radar.closestEnemy().getDist()<20 && radar.closestEnemy().getTargetActive()? true : false;
 
+        Boolean closeEnemy = radar.closestEnemy().getDist()<6;
+        Boolean closeInvader = radar.closestInvader().getDist()<6;
+
         Boolean activeInvader = radar.closestInvader().getDist()<20 && radar.closestInvader().getTargetActive()? true : false;
 
         if (activeEnemy && activeInvader){
@@ -52,6 +55,10 @@ public class ProcessAction {
             return "fire-"+radar.closestEnemy().getDirection();
         } else if (activeInvader && !activeEnemy){
             return "fire-"+radar.closestInvader().getDirection();
+        } else if (closeInvader) {
+            return radar.closestInvader().getDirection();
+        } else if (closeEnemy) {
+            return radar.closestEnemy().getDirection();
         } else {
             Route route = radar.getRoute();
             return route.getDirection();
