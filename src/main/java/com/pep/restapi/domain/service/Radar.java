@@ -110,51 +110,57 @@ public class Radar {
         if (LastPositionDistance.getDirection()==direction){
             return 0;
         } else {
+            System.out.println("checking free space:");
             switch(direction){
                 case "up":
-                    minYPosition = player.getPrevious().getY();
+                    minYPosition = player.getPosition().getY();
                     for (Integer i=1;i<=minYPosition;i++){
                         Coordinates newPosition = new Coordinates(player.getPosition().getY()-i,player.getPosition().getX());
-                        if (map.getMapElement(newPosition)=="space"){
+                        if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
                         } else {
-                            continue;
+                            break;
                         }
                     }
+                    System.out.println("up free space:"+freespace);
                     break;
                 case "down":
-                    maxYPosition = map.getMapHeight()-player.getPrevious().getY();
+                    maxYPosition = map.getMapHeight()-player.getPosition().getY();
                     for (Integer i=1;i<maxYPosition;i++){
-                        Coordinates newPosition = new Coordinates(player.getPrevious().getY()+i,player.getPrevious().getX());
-                        if (map.getMapElement(newPosition)=="space"){
+                        Coordinates newPosition = new Coordinates(player.getPosition().getY()+i,player.getPosition().getX());
+                        System.out.println("coord:"+player.getPosition().getY()+"+"+i+","+player.getPosition().getX()+" -> "+ map.getMapElement(newPosition));
+                        if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
                         } else {
-                            continue;
+                            break;
                         }
                     }
+                    System.out.println("down free space:"+freespace);
                     break;
                 case "left":
-                    minXPosition = player.getPrevious().getX();
+                    minXPosition = player.getPosition().getX();
                     for (Integer i=1;i<=minXPosition;i++){
-                        Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-i);
-                        if (map.getMapElement(newPosition)=="space"){
+                        Coordinates newPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX()-i);
+                        if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
                         } else {
-                            continue;
+                            break;
                         }
                     }
+                    System.out.println("left free space:"+freespace);
                     break;
                 case "right":
                 default:
-                    maxXPosition = map.getMapWidth()-player.getPrevious().getX();
+                    maxXPosition = map.getMapWidth()-player.getPosition().getX();
                     for (Integer i=1;i<maxXPosition;i++){
-                        Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+i);
+                        Coordinates newPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX()+i);
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
                         } else {
-                            continue;
+                            break;
                         }
                     }
+                    System.out.println("right free space:"+freespace);
                     break;
             }
             return freespace;
