@@ -1,5 +1,7 @@
 package com.pep.restapi.domain.entity;
 
+import com.pep.restapi.domain.valueobjects.Coordinates;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -83,6 +85,30 @@ public class Map{
     public String getMapElement(Integer y, Integer x){
 
         char element = grid[y][x];
+        switch (element){
+            case (char)0x2588:
+                return "wall";
+            case (char)0x2593:
+                return "wall";
+            case (char)0x2591:
+                return "space";
+            case (char)0x2592:
+                return "space";
+            case (char)0x16E5:
+                return "invader";
+            case (char)0x16DD:
+                return "invader-neutral";
+            case (char)0x16C4:
+                return "enemy";
+            case (char)0x263F:
+                return "player";
+        }
+        return "";
+    }
+
+    public String getMapElement(Coordinates coordinates){
+
+        char element = grid[coordinates.y()][coordinates.x()];
         switch (element){
             case (char)0x2588:
                 return "wall";

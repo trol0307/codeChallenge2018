@@ -1,9 +1,11 @@
 package com.pep.restapi.domain.service;
 
 import com.pep.restapi.domain.entity.*;
+import com.pep.restapi.domain.valueobjects.Coordinates;
 import com.pep.restapi.domain.valueobjects.Distance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -51,7 +53,8 @@ public class Radar {
 
         for(Integer i = visbleArea.getY1(); i<visbleArea.getY2();i++){
             for(Integer t = visbleArea.getX1(); t<visbleArea.getX2(); t++){
-                element = map.getMapElement(i, t);
+                Coordinates mapPosition= new Coordinates(i,t);
+                element = map.getMapElement(mapPosition);
                 switch(element){
                     case "invader":
                         Distance distInvader = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),i,t);
@@ -94,15 +97,50 @@ public class Radar {
 
     public String closestEmptySpace(){
 
-        List<String> freePositions = new ArrayList<>();
-        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()+1)=="space") {freePositions.add("right");}
-        if (map.getMapElement(player.getPosition().getY(),player.getPosition().getX()-1)=="space") {freePositions.add("left");}
-        if (map.getMapElement(player.getPosition().getY()-1,player.getPosition().getX())=="space") {freePositions.add("up");}
-        if (map.getMapElement(player.getPosition().getY()+1,player.getPosition().getX())=="space") {freePositions.add("down");}
+        List<Coordinates> freePositions = new ArrayList<>();
+        Coordinates myPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX());
+        Coordinates myLastPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX());
+
+        Coordinates leftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
+        Coordinates rightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
+        Coordinates upPosition = new Coordinates(player.getPrevious().getY()-1,player.getPrevious().getX());
+        Coordinates downPosition = new Coordinates(player.getPrevious().getY()+1,player.getPrevious().getX());
+
+        if (map.getMapElement(leftPosition)=="space" && !leftPosition.equals(myLastPosition)) {freePositions.add(leftPosition);}
+        if (map.getMapElement(rightPosition)=="space" && !rightPosition.equals(myLastPosition)) {freePositions.add(rightPosition);}
+        if (map.getMapElement(upPosition)=="space" && !upPosition.equals(myLastPosition)) {freePositions.add(upPosition);}
+        if (map.getMapElement(downPosition)=="space" && !downPosition.equals(myLastPosition)) {freePositions.add(downPosition);}
         Random rand = new Random();
 
         Integer randomNumber = rand.nextInt(freePositions.size()-1)+1;
 
-        return freePositions.get(randomNumber);
+        Coordinates freeSpace = freePositions.get(randomNumber);
+        Distance distFreeSpace = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),freeSpace.y(),freeSpace.x());
+
+        return distFreeSpace.getDirection();
     }
+/*
+    public Coordinates closestEmptySpaceMap(){
+
+        java.util.Map<Integer, Coordinates> freePositions = new HashMap<Integer,Coordinates>();
+
+        Integer freePositionsIndex = 0;
+        Coordinates myPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX());
+        Coordinates myLastPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX());
+
+        Coordinates leftPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
+        Coordinates rightPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-1);
+        Coordinates upPosition = new Coordinates(player.getPrevious().getY()-1,player.getPrevious().getX());
+        Coordinates downPosition = new Coordinates(player.getPrevious().getY()+1,player.getPrevious().getX());
+
+        if (map.getMapElement(leftPosition)=="space" && !leftPosition.equals(myLastPosition) {freePositions.put(freePositionsIndex,leftPosition);freePositionsIndex++;}
+        if (map.getMapElement(rightPosition)=="space" && !rightPosition.equals(myLastPosition) {freePositions.put(freePositionsIndex,rightPosition);freePositionsIndex++;}
+        if (map.getMapElement(upPosition)=="space" && !upPosition.equals(myLastPosition) {freePositions.put(freePositionsIndex,upPosition);freePositionsIndex++;}
+        if (map.getMapElement(downPosition)=="space" && !downPosition.equals(myLastPosition) {freePositions.put(freePositionsIndex,downPosition);freePositionsIndex++;}
+        Random rand = new Random();
+
+        Integer randomNumber = rand.nextInt(freePositionsIndex-1)+1;
+
+        return freePositions.get(randomNumber);
+    }*/
 }

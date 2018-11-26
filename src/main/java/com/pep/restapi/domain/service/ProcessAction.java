@@ -58,7 +58,7 @@ public class ProcessAction {
         } else {
             return radar.closestEmptySpace();
         }
-        
+
     }
 
 }
