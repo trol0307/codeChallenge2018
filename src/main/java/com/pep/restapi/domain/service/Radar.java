@@ -168,7 +168,7 @@ public class Radar {
 
     }
 
-    public String closestEmptySpace(){
+    public Route getRoute(){
         Integer maxFreeSpace=0;
         Integer result;
         String finalRoute="";
@@ -190,7 +190,7 @@ public class Radar {
             }
         }
         System.out.println("rumb:"+finalRoute);
-        return finalRoute;
+        return new Route(finalRoute,maxValueInMap);
     }
 
 }

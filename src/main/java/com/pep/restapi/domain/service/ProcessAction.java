@@ -31,13 +31,10 @@ public class ProcessAction {
         mapConstructor.setEnemies();
         mapConstructor.setPlayer();
         ViewMap.View(map);
-        Radar radar = new Radar(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders(),gamepost.getPlayers(),gamepost.getPlayer()  );
+        Radar radar = new Radar(map,gamepost.getBoard().getWalls(),gamepost.getPlayer().getArea(),gamepost.getInvaders(),gamepost.getPlayers(),gamepost.getPlayer());
 
 
 
-        System.out.println("closest enemy at:" + radar.closestEnemy().toString());
-        System.out.println("closest invader at:" + radar.closestInvader().toString());
-        System.out.println("closestEmptySpace at:" + radar.closestEmptySpace());
 
         Boolean activeEnemy = radar.closestEnemy().getDist()<20 && radar.closestEnemy().getTargetActive()? true : false;
 
@@ -56,7 +53,9 @@ public class ProcessAction {
         } else if (activeInvader && !activeEnemy){
             return "fire-"+radar.closestInvader().getDirection();
         } else {
-            return radar.closestEmptySpace();
+            Route route = radar.getRoute();
+            return route.getDirection();
+
         }
 
     }
