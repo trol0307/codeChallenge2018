@@ -47,20 +47,15 @@ public class ProcessAction {
             System.out.println("closest active enemy at:" + radar.closestEnemy().toString());
             System.out.println("closest active invader at:" + radar.closestInvader().toString());
             if (radar.closestEnemy().getDist()<=radar.closestInvader().getDist()){
-                System.out.println("target active enemy at:" + radar.closestEnemy().toString());
                 return "fire-"+radar.closestEnemy().getDirection();
             } else {
-                System.out.println("target active invader at:" + radar.closestInvader().toString());
                 return "fire-"+radar.closestInvader().getDirection();
             }
         } else if (activeEnemy && !activeInvader){
-            System.out.println("target active enemy at:" + radar.closestEnemy().toString());
             return "fire-"+radar.closestEnemy().getDirection();
         } else if (activeInvader && !activeEnemy){
-            System.out.println("target active invader at:" + radar.closestInvader().toString());
             return "fire-"+radar.closestInvader().getDirection();
         } else {
-            System.out.println("target free space at:" + radar.closestEmptySpace());
             return radar.closestEmptySpace();
         }
 

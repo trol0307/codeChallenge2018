@@ -80,12 +80,12 @@ public class Radar {
     }
 
     public Distance closestEnemy(){
-
+        System.out.println("closest active enemy at:" + closestEnemy.toString());
         return closestEnemy;
     }
 
     public Distance closestInvader(){
-
+        System.out.println("closest active invader at:" + closestInvader.toString());
         return closestInvader;
     }
 
@@ -173,7 +173,7 @@ public class Radar {
                 finalRoute=entry.getKey();     // Print the key with max value
             }
         }
-
+        System.out.println("rumb:"+finalRoute);
         return finalRoute;
     }
 
