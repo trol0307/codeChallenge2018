@@ -118,6 +118,14 @@ public class Radar {
                         Coordinates newPosition = new Coordinates(player.getPosition().getY()-i,player.getPosition().getX());
                         if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
+                            Coordinates newPositionLeft = new Coordinates(player.getPosition().getY()-i,player.getPosition().getX()-1);
+                            if ("space".equals(map.getMapElement(newPositionLeft))){
+                                freespace++;
+                            }
+                            Coordinates newPositionRight = new Coordinates(player.getPosition().getY()-i,player.getPosition().getX()+1);
+                            if ("space".equals(map.getMapElement(newPositionRight))){
+                                freespace++;
+                            }
                         } else {
                             break;
                         }
@@ -131,6 +139,14 @@ public class Radar {
                         System.out.println("coord:"+player.getPosition().getY()+"+"+i+","+player.getPosition().getX()+" -> "+ map.getMapElement(newPosition));
                         if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
+                            Coordinates newPositionLeft = new Coordinates(player.getPosition().getY()+i,player.getPosition().getX()-1);
+                            if ("space".equals(map.getMapElement(newPositionLeft))){
+                                freespace++;
+                            }
+                            Coordinates newPositionRight = new Coordinates(player.getPosition().getY()+i,player.getPosition().getX()+1);
+                            if ("space".equals(map.getMapElement(newPositionRight))){
+                                freespace++;
+                            }
                         } else {
                             break;
                         }
@@ -143,6 +159,14 @@ public class Radar {
                         Coordinates newPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX()-i);
                         if ("space".equals(map.getMapElement(newPosition))){
                             freespace++;
+                            Coordinates newPositionUp = new Coordinates(player.getPosition().getY()-1,player.getPosition().getX()-i);
+                            if ("space".equals(map.getMapElement(newPositionUp))){
+                                freespace++;
+                            }
+                            Coordinates newPositionDown = new Coordinates(player.getPosition().getY()+1,player.getPosition().getX()-i);
+                            if ("space".equals(map.getMapElement(newPositionDown))){
+                                freespace++;
+                            }
                         } else {
                             break;
                         }
@@ -156,6 +180,14 @@ public class Radar {
                         Coordinates newPosition = new Coordinates(player.getPosition().getY(),player.getPosition().getX()+i);
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
+                            Coordinates newPositionUp = new Coordinates(player.getPosition().getY()-1,player.getPosition().getX()+i);
+                            if ("space".equals(map.getMapElement(newPositionUp))){
+                                freespace++;
+                            }
+                            Coordinates newPositionDown = new Coordinates(player.getPosition().getY()+1,player.getPosition().getX()+i);
+                            if ("space".equals(map.getMapElement(newPositionDown))){
+                                freespace++;
+                            }
                         } else {
                             break;
                         }
