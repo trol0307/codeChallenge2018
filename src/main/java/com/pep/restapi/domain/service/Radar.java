@@ -164,6 +164,7 @@ public class Radar {
         for(String direction : directions){
             result = getFreeSpace(direction);
             possibleDirections.put(direction,result);
+            System.out.println("direccio:"+direction+" espais buits:"+result);
         }
 
         int maxValueInMap=(Collections.max(possibleDirections.values()));  // This will return max value in the Hashmap
