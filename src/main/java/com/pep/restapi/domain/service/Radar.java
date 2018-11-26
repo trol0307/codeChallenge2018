@@ -20,7 +20,7 @@ public class Radar {
 
     private Player player;
 
-    private Area visbleArea;
+    private Area visibleArea;
 
     private Distance closestEnemy;
 
@@ -35,7 +35,7 @@ public class Radar {
     public Radar(Map map, List<WallPosition> walls, Area visibleArea, List<Invader> invaders, List<Enemy> enemies, Player player){
         this.map = map;
         this.walls = walls;
-        this.visbleArea = visibleArea;
+        this.visibleArea = visibleArea;
         this.invaders = invaders;
         this.enemies = enemies;
         this.player = player;
@@ -49,10 +49,15 @@ public class Radar {
         closestSpace.setDist(20);
 
         String element ;
-
-        for(Integer i = visbleArea.getY1(); i<visbleArea.getY2();i++){
-            for(Integer t = visbleArea.getX1(); t<visbleArea.getX2(); t++){
+        System.out.println("from radar");
+        for(Integer i = visibleArea.getY1(); i<visibleArea.getY2();i++){
+            for(Integer t = visibleArea.getX1(); t<visibleArea.getX2(); t++){
+                if (i<0) i=0;
+                if (t<0) t=0;
+                if (i>map.getMapHeight()) i = map.getMapHeight();
+                if (t>map.getMapWidth()) t = map.getMapWidth();
                 Coordinates mapPosition= new Coordinates(i,t);
+
                 element = map.getMapElement(mapPosition);
                 switch(element){
                     case "invader":
@@ -75,7 +80,7 @@ public class Radar {
                         break;
 
                 }
-            }
+            } System.out.println("closest active invader at:" + closestInvader.toString());
         }
     }
 
@@ -96,6 +101,10 @@ public class Radar {
 
     public Integer getFreeSpace(String direction){
         Integer freespace=0;
+        Integer maxYPosition;
+        Integer maxXPosition;
+        Integer minYPosition;
+        Integer minXPosition;
         Coordinates myLastPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX());
         Distance LastPositionDistance = DistanceCalculator.distance(map, player.getPosition().getY(),player.getPosition().getX(),myLastPosition.y(),myLastPosition.x());
         if (LastPositionDistance.getDirection()==direction){
@@ -103,9 +112,9 @@ public class Radar {
         } else {
             switch(direction){
                 case "up":
-
-                    for (Integer i=1;i<5;i++){
-                        Coordinates newPosition = new Coordinates(player.getPrevious().getY()-i,player.getPrevious().getX());
+                    minYPosition = player.getPrevious().getY();
+                    for (Integer i=1;i<=minYPosition;i++){
+                        Coordinates newPosition = new Coordinates(player.getPosition().getY()-i,player.getPosition().getX());
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
                         } else {
@@ -114,7 +123,8 @@ public class Radar {
                     }
                     break;
                 case "down":
-                    for (Integer i=1;i<5;i++){
+                    maxYPosition = map.getMapHeight()-player.getPrevious().getY();
+                    for (Integer i=1;i<maxYPosition;i++){
                         Coordinates newPosition = new Coordinates(player.getPrevious().getY()+i,player.getPrevious().getX());
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
@@ -124,7 +134,8 @@ public class Radar {
                     }
                     break;
                 case "left":
-                    for (Integer i=1;i<5;i++){
+                    minXPosition = player.getPrevious().getX();
+                    for (Integer i=1;i<=minXPosition;i++){
                         Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()-i);
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
@@ -135,7 +146,8 @@ public class Radar {
                     break;
                 case "right":
                 default:
-                    for (Integer i=1;i<5;i++){
+                    maxXPosition = map.getMapWidth()-player.getPrevious().getX();
+                    for (Integer i=1;i<maxXPosition;i++){
                         Coordinates newPosition = new Coordinates(player.getPrevious().getY(),player.getPrevious().getX()+i);
                         if (map.getMapElement(newPosition)=="space"){
                             freespace++;
@@ -160,11 +172,9 @@ public class Radar {
         directions.add("down");
         directions.add("left");
         directions.add("right");
-
         for(String direction : directions){
             result = getFreeSpace(direction);
             possibleDirections.put(direction,result);
-            System.out.println("direccio:"+direction+" espais buits:"+result);
         }
 
         int maxValueInMap=(Collections.max(possibleDirections.values()));  // This will return max value in the Hashmap
