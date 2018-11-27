@@ -203,6 +203,7 @@ public class Radar {
     public Route getRoute(){
         Integer maxFreeSpace=0;
         Integer result;
+        Integer valueInMap;
         String finalRoute="";
         java.util.Map<String ,Integer> possibleDirections = new HashMap<>();
         List<String> directions = new ArrayList<>();
@@ -214,10 +215,18 @@ public class Radar {
             result = getFreeSpace(direction);
             possibleDirections.put(direction,result);
         }
-
+        int minValueInMap=(Collections.min(possibleDirections.values()));  // This will return max value in the Hashmap
         int maxValueInMap=(Collections.max(possibleDirections.values()));  // This will return max value in the Hashmap
+        Random rand = new Random();
+        Integer randomNumber = rand.nextInt(8)+1;
+        if (randomNumber>6) {
+            valueInMap = minValueInMap;
+        } else {
+            valueInMap = maxValueInMap;
+        }
+
         for (java.util.Map.Entry<String, Integer> entry : possibleDirections.entrySet()) {  // Itrate through hashmap
-            if (entry.getValue()==maxValueInMap) {
+            if (entry.getValue()==valueInMap) {
                 finalRoute=entry.getKey();     // Print the key with max value
             }
         }
